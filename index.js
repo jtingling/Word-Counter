@@ -5,6 +5,8 @@ const path = require('path')
 const express = require('express');
 const app = express();
 const multer = require('multer');
+const fileOpen = require('./data-service.js');
+
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -40,8 +42,8 @@ app.post('/', upload.single('textfile'), (req, res) => {
     if (req.file.mimetype != 'text/plain') {
         res.end("Wrong file type. Please use only .txt file extensions.");
     }
-    console.log(req.file);
-    res.end("file sent")//TODO: implement function to process file
+    fileOpen.openFile()
+    res.end();
 })
 
 app.listen(port, hostname, () => {
