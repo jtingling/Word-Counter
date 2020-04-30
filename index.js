@@ -42,8 +42,11 @@ app.post('/', upload.single('textfile'), (req, res) => {
     if (req.file.mimetype != 'text/plain') {
         res.end("Wrong file type. Please use only .txt file extensions.");
     }
-    fileOpen.openFile()
-    res.end();
+    fileOpen.openFile().then(data => {
+        res.end(data);
+    }).catch((err) => {
+        console.err(err);
+    })
 })
 
 app.listen(port, hostname, () => {
