@@ -1,11 +1,10 @@
-const http = require('http');
+
 const port = process.env.PORT || 8080;
-const bodyParser = require('body-parser');
 const path = require('path')
 const express = require('express');
 const app = express();
 const multer = require('multer');
-const fileOpen = require('./data-service.js');
+const { openFile, listData } = require('./data-service.js');
 
 
 let storage = multer.diskStorage({
@@ -17,17 +16,14 @@ let storage = multer.diskStorage({
     }
 })
 
-let upload = multer({storage: storage});
-
+let upload = multer({ storage: storage });
+const indexPath = path.join(__dirname + '/views/index.html'); 
 
 const hostname = "127.0.0.1";
 
 let textdata = [];
 
-app.use((req, res, next) => {
-    console.log("success.")
-    next()
-})
+app.set('view engine', 'ejs')
 
 app.use((err, req, res, next) => {
     console.err(err)
@@ -35,17 +31,18 @@ app.use((err, req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+ '/views/index.html'));
+    res.sendFile(indexPath);
 })
 
 app.post('/', upload.single('textfile'), (req, res) => {
     if (req.file.mimetype != 'text/plain') {
         res.end("Wrong file type. Please use only .txt file extensions.");
     }
-    fileOpen.openFile().then(data => {
-        res.end(data);
+    openFile().then((data) => {
+        let count = listData(data)
+        res.render('./results.ejs', {wordCount : count})
     }).catch((err) => {
-        console.err(err);
+        console.log(err);
     })
 })
 
