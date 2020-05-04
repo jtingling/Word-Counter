@@ -9,14 +9,15 @@
 </head>
 
 <body>
+
+    <h1>Word Counter</h1>
     <div id="upload-area">
-        <h1>Word Counter</h1>
         <form id="doc" action="/" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>Upload a text document.</legend>
-                    <input type="file" name="textfile" accept=".txt" />
-                    <button form="doc" name="text" type="submit">Submit</button>
-                
+                <input type="file" name="textfile" accept=".txt" />
+                <button form="doc" name="text" type="submit">Submit</button>
+
             </fieldset>
         </form>
         <br />
@@ -30,7 +31,7 @@
             </tr>
             <% topWords.forEach(function(words) { %>
             <tr>
-                <td><%= words.word %></td>
+                <td><%= words.word%></td>
                 <td><%= words.frequency %></td>
             </tr>
             <%}); %>
