@@ -74,7 +74,7 @@ module.exports.topWords = function (list) {
                     counter++;
                 }
             }
-            if (counter > 1) {
+            if (counter >= 5) {
                 wordTally.push({ word: selectedWord, frequency: counter });
             }
 

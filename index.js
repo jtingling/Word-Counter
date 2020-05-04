@@ -28,8 +28,8 @@ app.use((err, req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    let dash = '-';
-    let dashWords = [{words : '-', frequency : '-'}]
+    let dash = ' ';
+    let dashWords = [{words : ' ', frequency : ' '}]
     res.render('./index.ejs', {wordCount: dash, topWords : dashWords});
 })
 

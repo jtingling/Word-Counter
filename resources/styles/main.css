@@ -10,10 +10,25 @@ html {
     text-align: center;
 }
 h1 {
-    background-color: rgba(54,79,138,0.6);
-    margin-top: 15%;
+    background-color: rgba(23,35,61,0.5);
     border-style: solid;
     border-radius: 15px;
     text-align: center;
     color: black;
+}
+table {
+    background-color: rgba(23,35,61,0.8);
+    border-style: solid;
+    border-radius: 15px;
+    text-align: center;
+    margin-left: 50%;
+    color: rgb(177,188,216);    
+}
+
+caption {
+    background-color: rgba(23,35,61,0.8);
+    border-style: solid;
+    text-align: left;
+    border-radius: 15px;
+    text-align: center;
 }

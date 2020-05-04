@@ -3,34 +3,38 @@
 
 <head>
     <title>
-        Text Document Summarizer
+        Count Words
     </title>
     <link rel="stylesheet" href="/styles/main.css">
 </head>
 
 <body>
     <div id="upload-area">
-        <h1>Text Summarizer App</h1>
+        <h1>Word Counter</h1>
         <form id="doc" action="/" method="post" enctype="multipart/form-data">
-            <legend>Upload a text(*.txt) document.
-                <input type="file" name="textfile" accept=".txt" />
-                <button form="doc" name="text" type="submit">Submit</button>
-            </legend>
+            <fieldset>
+                <legend>Upload a text document.</legend>
+                    <input type="file" name="textfile" accept=".txt" />
+                    <button form="doc" name="text" type="submit">Submit</button>
+                
+            </fieldset>
         </form>
         <br />
     </div>
     <div id="result">
-        <ul>
-            <li>Number of Words: <%= wordCount %></li>
-            <li>Most frequently used words: </li>
-            <ul>
-                <% topWords.forEach(function(words) { %>
-                    <li><%= words.word %> : <%= words.frequency %></li>
-                <%}); %>
-            </ul>
-        </ul>
-
-
+        <table id="t2">
+            <caption>Number of Words: <%= wordCount %></caption>
+            <tr>
+                <th>Word</th>
+                <th>Frequency(>5)</th>
+            </tr>
+            <% topWords.forEach(function(words) { %>
+            <tr>
+                <td><%= words.word %></td>
+                <td><%= words.frequency %></td>
+            </tr>
+            <%}); %>
+        </table>
     </div>
 
 </body>
