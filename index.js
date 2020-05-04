@@ -4,7 +4,7 @@ const path = require('path')
 const express = require('express');
 const app = express();
 const multer = require('multer');
-const { openFile, listData } = require('./data-service.js');
+const { openFile, listData, topWords, getNumWords } = require('./data-service.js');
 
 
 let storage = multer.diskStorage({
@@ -17,11 +17,8 @@ let storage = multer.diskStorage({
 })
 
 let upload = multer({ storage: storage });
-const indexPath = path.join(__dirname + '/views/index.html'); 
-
+app.use(express.static(__dirname + '/resources'))
 const hostname = "127.0.0.1";
-
-let textdata = [];
 
 app.set('view engine', 'ejs')
 
@@ -31,7 +28,9 @@ app.use((err, req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(indexPath);
+    let dash = '-';
+    let dashWords = [{words : '-', frequency : '-'}]
+    res.render('./index.ejs', {wordCount: dash, topWords : dashWords});
 })
 
 app.post('/', upload.single('textfile'), (req, res) => {
@@ -39,8 +38,9 @@ app.post('/', upload.single('textfile'), (req, res) => {
         res.end("Wrong file type. Please use only .txt file extensions.");
     }
     openFile().then((data) => {
-        let count = listData(data)
-        res.render('./results.ejs', {wordCount : count})
+        let count = getNumWords(listData(data))
+        let wordTally = topWords(listData(data))
+        res.render('./index.ejs', {wordCount : count, topWords : wordTally})
     }).catch((err) => {
         console.log(err);
     })

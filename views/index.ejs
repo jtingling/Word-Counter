@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Text Document Summarizer
+    </title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <div id="upload-area">
+        <h1>Text Summarizer App</h1>
+        <form id="doc" action="/" method="post" enctype="multipart/form-data">
+            <legend>Upload a text(*.txt) document.
+                <input type="file" name="textfile" accept=".txt" />
+                <button form="doc" name="text" type="submit">Submit</button>
+            </legend>
+        </form>
+        <br />
+    </div>
+    <div id="result">
+        <ul>
+            <li>Number of Words: <%= wordCount %></li>
+            <li>Most frequently used words: </li>
+            <ul>
+                <% topWords.forEach(function(words) { %>
+                    <li><%= words.word %> : <%= words.frequency %></li>
+                <%}); %>
+            </ul>
+        </ul>
+
+
+    </div>
+
+</body>
+
+</html>
