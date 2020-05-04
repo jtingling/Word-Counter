@@ -46,6 +46,6 @@ app.post('/', upload.single('textfile'), (req, res) => {
     })
 })
 
-app.listen(port, hostname, () => {
+app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);
 });
